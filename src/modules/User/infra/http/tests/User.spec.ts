@@ -2,9 +2,11 @@ import request from "supertest";
 
 import app from "@shared/infra/http/server";
 
+const { SECRET_KEY } = process.env;
+
 describe("User Create", () => {
   test("Should check if create user", async () => {
-    const response = await request(app).post("/user/create").send({
+    const response = await request(app).post("/user/create").set("Authorization", `Bearer ${SECRET_KEY}`).send({
       name: "Victor Noah Campos",
       cpf: "54155005026",
       cnpj: null,
@@ -24,14 +26,14 @@ describe("User Create", () => {
   });
 
   test("Should check if read user", async () => {
-    const response = await request(app).get("/user/read/1");
+    const response = await request(app).get("/user/read/1").set("Authorization", `Bearer ${SECRET_KEY}`);
 
     expect(response.body).toHaveProperty("id");
     expect(response.status).toBe(200);
   });
 
   test("Should check if update user", async () => {
-    const response = await request(app).patch("/user/update/1").send({
+    const response = await request(app).patch("/user/update/1").set("Authorization", `Bearer ${SECRET_KEY}`).send({
       name: "Victor Noah Campos",
       cpf: "54155005026",
       cnpj: null,
@@ -51,7 +53,7 @@ describe("User Create", () => {
   });
 
   test("Should check if delete user", async () => {
-    const response = await request(app).delete("/user/delete/1");
+    const response = await request(app).delete("/user/delete/1").set("Authorization", `Bearer ${SECRET_KEY}`);
 
     expect(response.status).toBe(200);
   });
