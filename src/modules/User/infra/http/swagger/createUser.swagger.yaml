@@ -1,0 +1,49 @@
+/user/create:
+  post:
+    tags:
+      - User
+    summary: Performs the creation of a buyer and seller.
+    security:
+      - BearerAuth: []
+    requestBody:
+      content:
+        application/json:
+          example:
+            name: "Felipe Felipe da Rocha"
+            cpf: "37669481480"
+            cnpj: null
+            email: "felipe-darocha99@gmail.com"
+            cel: "95983640281"
+            tel: "9536741750"
+            cep: "69305080"
+            street: "Rua Doutor Arnaldo Brandão"
+            number: "522"
+            city: "Boa Vista"
+            district: "São Francisco"
+            state: "Roraima"
+    responses:
+      201:
+        content:
+          application/json:
+            example:
+                id: "1"
+                name: "Felipe Felipe da Rocha"
+                cpf: "37669481480"
+                cnpj: null
+                email: "felipe-darocha99@gmail.com"
+                cel: "95983640281"
+                tel: "9536741750"
+                cep: "69305080"
+                street: "Rua Doutor Arnaldo Brandão"
+                number: "522"
+                city: "Boa Vista"
+                district: "São Francisco"
+                state: "Roraima"
+      '409':
+        description: Conflict
+      '400':
+        description: Bad request
+        content:
+          application/json:
+            example:
+              message: "User not created"
