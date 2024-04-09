@@ -49,4 +49,10 @@ describe("User Create", () => {
     expect(response.body).toHaveProperty("id");
     expect(response.status).toBe(200);
   });
+
+  test("Should check if delete user", async () => {
+    const response = await request(app).delete("/user/delete/1");
+
+    expect(response.status).toBe(200);
+  });
 });

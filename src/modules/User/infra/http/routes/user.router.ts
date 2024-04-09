@@ -14,11 +14,16 @@ import { ReadUserValidator } from "../validators/ReadUser.validator";
 import { UpdateUserController } from "../Controllers/UpdateUserController";
 import { UpdateUserValidator } from "../validators/UpdateUser.validator";
 
+// Deleção do Usuário
+import { DeleteUserController } from "../Controllers/DeleteUserController";
+import { DeleteUserValidator } from "../validators/DeleteUser.validator";
+
 export const UserRouter = Router();
 
 const createUserController = new CreateUserController();
 const readUserController = new ReadUserController();
 const updateUserController = new UpdateUserController();
+const deleteUserController = new DeleteUserController();
 
 // POST
 UserRouter.post("/create", celebrate(CreateUserValidator), createUserController.handle);
@@ -28,3 +33,6 @@ UserRouter.get("/read/:id", celebrate(ReadUserValidator), readUserController.han
 
 // PATCH
 UserRouter.patch("/update/:id", celebrate(UpdateUserValidator), updateUserController.handle);
+
+// DELETE
+UserRouter.delete("/delete/:id", celebrate(DeleteUserValidator), deleteUserController.handle);

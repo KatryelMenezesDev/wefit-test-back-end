@@ -58,6 +58,14 @@ export class UserRepository implements IUserRepository {
     return user;
   }
 
+  async delete(id: number): Promise<void> {
+    await prisma.user.delete({
+      where: {
+        id
+      }
+    });
+  }
+
   async findByEmail(email: string): Promise<boolean> {
     const user = await prisma.user.findFirst({
       where: {
