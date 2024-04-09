@@ -1,0 +1,36 @@
+/user/read/{id}:
+  get:
+    tags:
+      - User
+    summary: Retrieves a specific user.
+    security:
+      - BearerAuth: []
+    description: Retrieves details of a specific user based on the provided ID.
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: ID
+    responses:
+      200:
+        description: User details successfully returned
+        content:
+          application/json:
+            example:
+                id: "1"
+                name: "Felipe Felipe da Rocha"
+                cpf: "37669481480"
+                cnpj: null
+                email: "felipe-darocha99@gmail.com"
+                cel: "95983640281"
+                tel: "9536741750"
+                cep: "69305080"
+                street: "Rua Doutor Arnaldo Brandão"
+                number: "522"
+                city: "Boa Vista"
+                district: "São Francisco"
+                state: "Roraima"
+      400:
+        description: User not found!

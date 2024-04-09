@@ -2,7 +2,7 @@ import request from "supertest";
 
 import app from "@shared/infra/http/server";
 
-describe("User Creation", () => {
+describe("User Create", () => {
   test("Should check if create user", async () => {
     const response = await request(app).post("/user/create").send({
       name: "Victor Noah Campos",
@@ -21,5 +21,12 @@ describe("User Creation", () => {
 
     expect(response.body).toHaveProperty("id");
     expect(response.status).toBe(201);
+  });
+
+  test("Should check if read user", async () => {
+    const response = await request(app).get("/user/read/1");
+
+    expect(response.body).toHaveProperty("id");
+    expect(response.status).toBe(200);
   });
 });
