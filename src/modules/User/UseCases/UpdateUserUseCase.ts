@@ -26,6 +26,14 @@ export class UpdateUserUseCase {
     district,
     state
   }: InputUpdateUserDTO): Promise<OutputUpdateUserDTO> {
+    // Verificar se o usuário existe
+
+    const userExists = await this.userRepository.read(id);
+
+    if (!userExists) {
+      throw new BadRequestError("User not found");
+    }
+
     // Verificar se o CPF, CNPJ, E-mail, Celular e Telefone já estão cadastrados
     const [cpfExists, cnpjExists, emailExists, celExists, telExists] = await Promise.all([
       cnpj ? this.userRepository.findByCnpj(cpf) : Promise.resolve(null),
