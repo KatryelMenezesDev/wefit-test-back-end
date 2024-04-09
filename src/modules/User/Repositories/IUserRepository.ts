@@ -4,6 +4,7 @@ export interface IUserRepository {
   // Interface CRUD do usuário
   create(user: UserDTO): Promise<UserDTO>;
   read(id: number): Promise<UserDTO>;
+  update(user: UserDTO): Promise<UserDTO>;
 
   // Interdace para verificar se o usuário já existe
   findByEmail(email: string): Promise<boolean>;
