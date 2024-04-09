@@ -1,6 +1,7 @@
 /* eslint-disable import-helpers/order-imports */
 import { celebrate } from "celebrate";
 import { Router } from "express";
+import { Authentication } from "@utils/Authentication";
 
 // Criação do Usuário
 import { CreateUserController } from "@modules/User/infra/http/Controllers/CreateUserController";
@@ -26,13 +27,13 @@ const updateUserController = new UpdateUserController();
 const deleteUserController = new DeleteUserController();
 
 // POST
-UserRouter.post("/create", celebrate(CreateUserValidator), createUserController.handle);
+UserRouter.post("/create", Authentication, celebrate(CreateUserValidator), createUserController.handle);
 
 // GET
-UserRouter.get("/read/:id", celebrate(ReadUserValidator), readUserController.handle);
+UserRouter.get("/read/:id", Authentication, celebrate(ReadUserValidator), readUserController.handle);
 
 // PATCH
-UserRouter.patch("/update/:id", celebrate(UpdateUserValidator), updateUserController.handle);
+UserRouter.patch("/update/:id", Authentication, celebrate(UpdateUserValidator), updateUserController.handle);
 
 // DELETE
-UserRouter.delete("/delete/:id", celebrate(DeleteUserValidator), deleteUserController.handle);
+UserRouter.delete("/delete/:id", Authentication, celebrate(DeleteUserValidator), deleteUserController.handle);
